@@ -51,13 +51,13 @@ ground_truth = scop.getDomainLabels(domains)
 
 # Define population.
 indv_template = DecimalIndividual(ranges=[(0.1, 0.9),(0.1, 0.9),(0.1, 0.9)], eps=[0.001,0.001,0.001])
-population = Population(indv_template=indv_template, size=30).init()
+population = Population(indv_template=indv_template, size=10).init()
 
 # Create genetic operators.
 #selection = TournamentSelection()
 selection = RouletteWheelSelection()
 crossover = UniformCrossover(pc=0.8, pe=0.5)
-mutation = FlipBitMutation(pm=0.9)
+mutation = FlipBitMutation(pm=0.02)
 
 # Create genetic algorithm engine.
 engine = GAEngine(population=population, selection=selection, crossover=crossover, mutation=mutation, analysis=[FitnessStore])
@@ -99,7 +99,8 @@ class ConsoleOutputAnalysis(OnTheFlyAnalysis):
         best_indv = population.best_indv(engine.fitness)
         msg = 'Generation: {}, best fitness: {:.3f}'.format(g, engine.ori_fmax)
         print(msg)
-        writer.write(str(best_indv)+'\n')
+        writer.write(msg)
+        writer.write(str(best_indv.chromsome)+'\n')
         #print(str(best_indv[0])+str(best_indv[1])+str(best_indv[2]))
         #self.logger.info(msg)
 
