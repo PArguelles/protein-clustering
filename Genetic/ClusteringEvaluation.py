@@ -20,7 +20,7 @@ def clusterEvaluationNoLabels(X, labels):
 
 def saveResults(measure1, measure2, algorithm, sample, metrics):
 
-    path_to_results = 'C:/ShareSSD/scop/clustering_results_single/'
+    path_to_results = 'C:/ShareSSD/scop/clustering_results_single_matrix/'
     
     with open(path_to_results+algorithm+'_'+sample+'_'+measure1+'_'+measure2, 'w') as nf:
         nf.write('# Cluster evaluation: \n')

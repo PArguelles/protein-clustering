@@ -4,7 +4,7 @@ import os
 import re
 
 #path_to_results = 'C:/ShareSSD/scop/best_results/'
-path_to_results = 'C:/ShareSSD/scop/clustering_results_single/'
+path_to_results = 'C:/ShareSSD/scop/clustering_results_single_matrix/'
 path_to_tables = 'C:/ShareSSD/scop/tables_single_matrix/table-'
 
 for spl in ['a.1', 'a.3', 'b.2', 'b.3']:

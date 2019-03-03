@@ -8,55 +8,48 @@ import numpy as np
 
 from sklearn.cluster import AgglomerativeClustering
 
+algorithms = ['complete','average','kmedoids']
 
-for spl in ['a.1','a.3','b.2','b.3']:
+measures = ['rmsd','gdt_2','gdt_4','tm','maxsub','seq']
 
-    # load protein data before loop
-    path_to_results = 'C:/ShareSSD/scop/clustering_results_single/'
-    measure1 = 'maxsub_high'
-    measure2 = 'maxsub_high'
-    measure3 = 'maxsub_high'
+samples = ['a.1','a.3','b.2','b.3']
 
-    sample_for_domains = spl
-    sample = str(spl)+'.'
-    
-    matrix1 = rs.loadMatrixFromFile(sample, measure1)
-    matrix2 = rs.loadMatrixFromFile(sample, measure2)
-    matrix3 = rs.loadMatrixFromFile(sample, measure3)
+for m in measures:
+    for alg in algorithms:
+        for spl in samples:
 
-    domains = rs.loadDomainListFromFile(sample)
+            # load protein data before loop
+            path_to_results = 'C:/ShareSSD/scop/clustering_results_single_matrix/'
+            measure1 = m
 
-    n_labels = scop.getUniqueClassifications(sample_for_domains)
+            sample_for_domains = spl
+            sample = str(spl)+'.'
+            
+            matrix1 = rs.loadMatrixFromFile(sample, measure1)
+            matrix1 = mf.minMaxScale(matrix1)
+            matrix1 = mf.calculateDistances(matrix1)
 
-    ground_truth = scop.getDomainLabels(domains)
-    ground_truth = map(int, ground_truth)
-    ground_truth = list(map(int, ground_truth))
+            domains = rs.loadDomainListFromFile(sample)
 
-    matrix1 = mf.minMaxScale(matrix1)
-    matrix2 = mf.minMaxScale(matrix2)
-    matrix3 = mf.minMaxScale(matrix3)
+            n_labels = scop.getUniqueClassifications(sample_for_domains)
 
-    matrix1 = mf.calculateDistances(matrix1)
-    matrix2 = mf.calculateDistances(matrix2)
-    matrix3 = mf.calculateDistances(matrix3)
+            ground_truth = scop.getDomainLabels(domains)
+            ground_truth = map(int, ground_truth)
+            ground_truth = list(map(int, ground_truth))
 
-    for w1 in np.arange(0.05,1.05,0.05):
+            w1 = 1
 
-        w2 = 0
-        w3 = 1-w1
+            # Hierarchical
+            for link in ['complete','average']:
+                agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage='complete').fit(matrix1)
+                labels = agglomerative.labels_
+                metrics = ce.clusterEvaluation(matrix1, labels, ground_truth)
+                ce.saveResults(measure1, measure1, link, sample, metrics)
+                print(metrics)
 
-        corr = mf.calculateCorrelationMatrix(matrix1, matrix2, matrix3, w1, w2, w3)
-
-        # Hierarchical
-        for link in ['complete','average']:
-            agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage='complete').fit(corr)
-            labels = agglomerative.labels_
-            metrics = ce.clusterEvaluation(corr, labels, ground_truth)
+            # K-Medoids
+            medoids, clusters = km.kMedoids(matrix1, n_labels, 100)
+            labels = km.sortLabels(clusters)
+            metrics = ce.clusterEvaluation(matrix1, labels, ground_truth)
+            ce.saveResults(measure1, measure1, 'kmedoids', sample, metrics)
             print(metrics)
-            #ce.saveResultsWithWeights(measure1, measure2, w1, 'hierarchical_'+link, sample, metrics)
-
-        # K-Medoids
-        medoids, clusters = km.kMedoids(corr, n_labels, 100)
-        labels = km.sortLabels(clusters)
-        metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-        #ce.saveResultsWithWeights(measure1, measure2, w1, 'kmedoids', sample, metrics)

@@ -45,7 +45,7 @@ def readDistancesMaxsub(sample, measure):
                         parsed = str(line).strip().split()
 
                         # value is the average between the two
-                        value = (float(parsed[4]))#+float(parsed[5]))/2
+                        value = (float(parsed[4])+float(parsed[5]))/2
 
                     counter += 1
 
@@ -97,6 +97,9 @@ def readDistancesMaxsub(sample, measure):
 
     matrix.dump('C:/ShareSSD/scop/tests/matrix_'+sample+'_'+measure)
 
+
+readDistancesMaxsub('a.1.','tm')
+readDistancesMaxsub('a.1.','maxsub')
 readDistancesMaxsub('a.3.','maxsub')
 readDistancesMaxsub('b.2.','maxsub')
 readDistancesMaxsub('b.3.','maxsub')

@@ -16,8 +16,8 @@ measure1 = 'maxsub'
 measure2 = 'maxsub'
 measure3 = 'maxsub'
 
-sample_for_domains = 'a.1'
-sample = 'a.1.'
+sample_for_domains = 'b.2'
+sample = 'b.2.'
 
 path_to_matrix = 'C:/ShareSSD/scop/tests/matrix_'+sample+'_'+measure1
 
