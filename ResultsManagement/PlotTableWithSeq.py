@@ -4,8 +4,10 @@ import os
 import re
 
 #path_to_results = 'C:/ShareSSD/scop/best_results/'
-path_to_results = 'C:/ShareSSD/scop/clustering_results_single_matrix/'
-path_to_tables = 'C:/ShareSSD/scop/tables_single_matrix/table-'
+path_to_results = 'C:/ShareSSD/scop/best_results_with_seq/'
+path_to_tables = 'C:/ShareSSD/scop/tables_single_seq/table-'
+
+algorithms = ['complete','average','kmedoids']
 
 for spl in ['a.1', 'a.3', 'b.2', 'b.3']:
     for alg in ['complete','average','kmedoids']:
@@ -32,8 +34,6 @@ for spl in ['a.1', 'a.3', 'b.2', 'b.3']:
                         lab1 = 'GDT-HA'
                     else:
                         lab1 = 'GDT-TS'
-                elif 'seq' in measure1:
-                    lab1 = 'Sequence'
                 elif 'tm' in measure1:
                     lab1 = 'TM-Score'
                 elif 'maxsub' in measure1:
@@ -46,7 +46,7 @@ for spl in ['a.1', 'a.3', 'b.2', 'b.3']:
                     line = fp.readline()
                     while line:
                         # start reading metrics
-                        if '# Cluster evaluation:' in line:
+                        if 'Weights:' in line:
                             i = 0
                             #print(line)   
                             while i < 6: #6 metrics

@@ -9,7 +9,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 
 
-for measure in ['rmsd','gdt_2','gdt_4']:
+for measure in ['rmsd','gdt_2','gdt_4','tm','maxsub']:
     for spl in ['a.1','a.3','b.2','b.3']:
 
         # load protein data before loop
@@ -53,11 +53,12 @@ for measure in ['rmsd','gdt_2','gdt_4']:
                 agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage='complete').fit(corr)
                 labels = agglomerative.labels_
                 metrics = ce.clusterEvaluation(corr, labels, ground_truth)
+                ce.saveResultsWithSequenceWeights(measure1, measure3, w1, link, sample, metrics)
                 print(metrics)
-                ce.saveResultsWithWeights(measure1, measure2, w1, 'hierarchical_'+link, sample, metrics)
 
             # K-Medoids
             medoids, clusters = km.kMedoids(corr, n_labels, 100)
             labels = km.sortLabels(clusters)
             metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-            ce.saveResultsWithWeights(measure1, measure2, w1, 'kmedoids', sample, metrics)
+            ce.saveResultsWithSequenceWeights(measure1, measure3, w1, 'kmedoids', sample, metrics)
+            print(metrics)

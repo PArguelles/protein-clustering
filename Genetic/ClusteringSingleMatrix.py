@@ -9,9 +9,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 
 algorithms = ['complete','average','kmedoids']
-
 measures = ['rmsd','gdt_2','gdt_4','tm','maxsub','seq']
-
 samples = ['a.1','a.3','b.2','b.3']
 
 for m in measures:
