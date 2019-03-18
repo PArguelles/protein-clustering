@@ -1,0 +1,6 @@
+
+
+mostrar as combinaÃ§oes de matrizes sem os pesos
+
+mencionar que no pior dos casos, os valores das classificaçoes tendem para os casos base,
+na melhor, os valores sao melhorados
