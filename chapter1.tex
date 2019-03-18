@@ -44,13 +44,11 @@ Given the issues and usefulness of comparing and grouping protein structures, wi
 	\item Assess which structure similarity measure combinations produce the best clusters for the different algorithms.
 \end{itemize}
 	
-\chapter{State of the art}
+\chapter{Proteins}	
 
-In this chapter will describe some relevant elements of a protein, methods to measure structure similarity and provide a description of the state of the art regarding clustering and protein alignment algorithms. 
+This chapter provides a brief description of the core protein concepts for this work.
 
-\section{Proteins}
-
-\subsection{Amino acids}
+\section{Amino acids}
 Proteins are formed by polypeptides, which are in turn amino acid chains. These have three main components: an amine group (-NH2), a carboxyl group (-COOH) and a side chain connected to the alpha carbon (central carbon of an amino acid). This chain is what differentiates and identifies the 20 existing amino acids, due to being the only element which varies among them. Considering the described format, peptides have two terminal zones in their chains, one with the amine group and the other with the carboxyl group, also known as N-terminal and C-terminal respectively. Thus, all protein molecules are polymers assembled from combinations of 20 different amino acids connected through peptide bonds \cite{branden1999introduction}. In Figure \ref{fig:aminoacid} we can see an example of a basic structure of an amino acid and several of them connected forming a chain.
 
 \begin{figure}[htbp]
@@ -63,25 +61,29 @@ Proteins are formed by polypeptides, which are in turn amino acid chains. These 
 	\label{fig:aminoacid}
 \end{figure}
 
-\subsection{Structure}
+\section{Structure}
 Proteins are very complex molecules whose function is determined by its structure. In order to help understand it, we generally describe protein structure in four levels:
 
 \begin{itemize}
- 	\item Primary structure: linear amino acid sequence with peptide bonds;
- 	\item Secondary structure: local folded structures, such as the $\alpha$-helix and the $\beta$-sheet;
- 	\item Tertiary structure: the three-dimensional structure of the protein;
- 	\item Quaternary structure: some proteins are composed by several polypeptide chains, known as subunits. The interaction between subunits gives the protein its quaternary structure.
+	\item Primary structure: linear amino acid sequence with peptide bonds;
+	\item Secondary structure: local folded structures, such as the $\alpha$-helix and the $\beta$-sheet;
+	\item Tertiary structure: the three-dimensional structure of the protein;
+	\item Quaternary structure: some proteins are composed by several polypeptide chains, known as subunits. The interaction between subunits gives the protein its quaternary structure.
 \end{itemize}
 
 It is worth mentioning that primary structures, i.e. sequences are more volatile since they must adapt in order for them to continue carrying on with their roles, whereas the tertiary structure is better conserved throughout these processes. This makes it so that structural conformation has an increased relevancy when it comes to analyzing proteins.
 
 Within proteins, we can also find domains. They are considered to be independent regions in the proteins, often viewed as compact and spatially distinct units with functionalities that usually help the overall protein carry out its function. It is important to mention that similar domains can be found in proteins with different functionalities \cite{ponting2002natural}. 
 
-\subsection{Homology}
+\section{Homology}
 
 Proteins change in order to continue carrying on their functions, which means that the ones present in organisms nowadays are the result of a long and continuous evolutionary process. Through this we can define the term homology, which in the protein context, means that two proteins share a common ancestor. Finding homology is useful because we may be able to infer unknown information of a given protein through an homologous one.
 
-In order to determine if two proteins are homologous or not, we must analyze both their primary and tertiary structures in an attempt to find corresponding residues. Usually, we can start by checking the primary structures to see if there are identical amino acid residues in a significant number of sequential positions throughout the amino acid chain. Generally, to establish sequence homology, around $30\%$ of sequence identity must be found. If this percentage falls below this value we are required to further analyze the tertiary structures which are better preserved than sequences \cite{pearson2013introduction}. 
+In order to determine if two proteins are homologous or not, we must analyze both their primary and tertiary structures in an attempt to find corresponding residues. Usually, we can start by checking the primary structures to see if there are identical amino acid residues in a significant number of sequential positions throughout the amino acid chain. Generally, to establish sequence homology, around $30\%$ of sequence identity must be found. If this percentage falls below this value we are required to further analyze the tertiary structures which are better preserved than sequences \cite{pearson2013introduction}. 	
+	
+\chapter{State of the art}
+
+In this chapter will describe some of the available methods to measure protein structure similarity and provide a description of the state of the art regarding clustering and protein alignment algorithms. 
 
 \section{Protein comparisons} 
 
@@ -167,8 +169,6 @@ When comparing two given protein structures, we can usually identify three main 
 	\caption{Example of a structure alignment between 4HHB.A and 4HHB.B}
 	\label{fig:structurealignment}
 \end{figure}
-
-%representation - optimization - alignment evaluation
 
 To date, there are many comparison methods that use information regarding the 3-D conformation of proteins. We can split these methods in a few categories. There are approaches that break protein structures into smaller units and then analyze the relationships between these units to determine the similarity of two structures. Some examples that fit this category are: RAPIDO \cite{mosca2008alignment}, VAST \cite{gibrat1996surprising}, MASS \cite{dror2003mass}, SSM \cite{krissinel2003protein} and DALI \cite{holm1993protein}. Another possible approach that FAST \cite{zhu2005fast} and SABERTOOTH \cite{teichert2007sabertooth} explore, is obtaining a structural alignment based on pairwise residue distances. Furthermore, there are also multiple structural alignment methods such as: CBA \cite{ebert2006development}, POSA \cite{ye2005multiple}, MultiProt \cite{shatsky2004method}, MALECON \cite{ochagavia2004progressive} and MUSTANG \cite{konagurthu2006mustang}.
 
@@ -410,7 +410,7 @@ One particularly important feature of these algorithms is the ability to detect 
 Furthermore, clustering algorithms may belong to different categories, each of which affects how the data is processed and grouped. This causes different algorithms to produce different clusters for the same dataset. So, in order to choose an algorithm, we must first consider the kind of data we want to be processed, what kind of clusters we can expect from it and both the advantages and disadvantages of the algorithms. In the subsections ahead, some insight on the clustering categories will be provided, as well as some instances of their algorithms.
 
 \medskip
-\subsubsection{Partitional clustering - CITE KMEDSOIDS}
+\subsubsection{Partitional clustering - CITE KMEDOIDS}
 
 This is one of the most popular and basic techniques for data clustering. In partitional clustering, the dataset is processed with the usual goal of maximizing a measure of similarity for members of the same clusters. During runtime, while the dataset is being clustered, the algorithms often reallocate data points to different clusters until convergence is reached. The result of these algorithms is a division of the data points into different non-overlapping clusters.
 
@@ -667,7 +667,7 @@ Its value ranges from 0 to 1. \cite{rosenberg2007v} \cite{scikitlearn}
 
 \end{itemize}
  
-\chapter{Data and tools} 
+\chapter{Available data and tools} 
 
 This chapter will provide a brief description of the available tools that were to developed the required code and the platforms that hold useful data for this work. 
 
@@ -711,13 +711,13 @@ TM-Align on the other hand, may be employed to align proteins with different seq
 
 \section{Languages and libraries}
 
-\subsection{Python - CITE DEAP}
+\subsection{Python}
 
 Python a is very popular, high-level and general-purpose programming language. It can be used to build standalone applications, automate tasks and many others. Besides these uses, Python has been one of the most used languages in machine learning since it provides several powerful libraries designed for the type of tasks the field requires.
 
 \textbf{DEAP}
 
-The Distributed Evolutionary Algorithms in Python library (DEAP) is a framework that covers a broad range of artificial intelligence algorithms. Among this collection, there are tools that allow its users to build a genetic algorithm specifically tailored to the task at hand.
+The Distributed Evolutionary Algorithms in Python library (DEAP) is a framework that covers a broad range of artificial intelligence algorithms. Among this collection, there are tools that allow its users to build a genetic algorithm specifically tailored to the task at hand \cite{DEAP_JMLR2012}.
 
 \textbf{Matplotlib}
 
@@ -805,19 +805,28 @@ Uniprot \cite{uniprot2014uniprot} is a collection of resources regarding protein
 	\item Uniprot archive (UniParc): stores most of the available and known protein sequences.
 \end{itemize}
 
-\chapter{Approach}
+\chapter{SCOP vs SCOP2 vs SCOPe - CITE IMAGE -CITE PAPERS}
 
-This chapter contains a detailed description of the experiments made during the course of this work.
+\textbf{Nowadays, there are 3 different SCOP platforms that contain both structures and classification data. The first one, SCOP, is the original one which was released in 1994 and contains the tree-like hierarchical structure through which we are able to study the relationships between the proteins present in the database. SCOP's last release was in June of 2009, after which SCOP2 was introduced, with the goal of providing a better framework for protein structure annotation and classification. Such improvements were achieved by changing the hierarchy's representation into a directed acyclic graph that allows other types of relationships among the data, however at this time, SCOP2 is still a prototype that only contains a portion of the total data. Lastly, SCOPe (extended) can be seen as the direct continuation of the classic SCOP hierarchy and is still maintained and updated regularly to this day, hence it was the chosen platform for this work. Though the different SCOP versions differ among themselves, both their annotation and classification processes remain the same, meaning that the structures are evaluated according various factors, namely, automated comparison methods that take both sequences and structures into account, the function of a given protein and manual curation from experts. Figure \ref{fig:scopclassificationprocess} illustrates the standard process and the mentioned classification factors.}
 
-\section{Sampling}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\linewidth]{scopclassificationprocess}
+	\caption{Standard SCOPe classification process}
+	\label{fig:scopclassificationprocess}
+\end{figure}
 
-The amount of protein structure files present in the SCOP database exceeds the hundreds of thousands, and thus it becomes an unfeasible task to obtain a complete similarity matrix with the available hardware. Given this there is the need to sample the data in a way that we can obtain a wide range of alignments in terms of their quality. We want there to be a lot of different structures in our sample because this way the amount of very similar and very different structures will be low. This is a good thing because in extreme cases of either similarity or dissimilarity, any single structure similarity measure suffices. It is the middle ground of these ranges that we want to study, since it is most likely where there will be relevant changes in the classification and also where the shortcomings of the measures will manifest themselves.
+\chapter{Sampling}
 
-This is why the sample chosen must contain more intermediate values, since it is in these situations that the used similarity measures are most likely to misrepresent the differences between two structures and as such, it is where we will try to compensate with another measure.
+\textbf{Nowadays, the SCOPe database contains several thousands of domains (\textasciitilde 274000) and thus it becomes an unfeasible task to obtain a complete similarity matrix, i.e. the matrix representation of the all-vs-all structure alignments, with the available hardware, since it would require the computation of millions of alignments.} Given this limitation, there is the need to sample the data in a way that we can obtain a wide range of alignments in terms of their quality. 
+
+\textbf{We want there to be a lot of different structures in our sample because this way the amount of matching residues between a given pair of proteins will vary a lot. This is a good thing because in extreme cases of similarity any single structure similarity measure suffices, since it will be fairly easy to identify residue correspondences, while in the case of extreme dissimilarity it will be harder for some of them to find any feint traces of homology, should they exist.} It is the middle ground of these ranges that we want to study, since it is most likely where there will be relevant changes in the classification and also where the shortcomings of the measures will manifest themselves.
+
+This is why the sample chosen must contain more intermediate values, because it is in these situations that the used similarity measures are most likely to misrepresent the differences between two structures and as such, it is where we will try to compensate with another measure.
 
 With these restrictions in mind, a few samples were chosen from the SCOP hierarchy. The structures taken were chosen from specific classes and folds, for instance, $a.1.$ would return every structure from every family and superfamily that was labeled with a class $\alpha$ and fold 1. 
 
-\section{Alignment computation}
+\chapter{Alignment computation}
 
 In order to start clustering the structures, it was essential to obtain the structural alignments and the resulting values. To accomplish this task, the MaxCluster program was used. This piece of software is implemented in the C programming language which makes its runtime extremely low for single alignments. Maxcluster supports list processing that allows the computation of all against all alignments for the given input structures, which is both faster to calculate and easier to process than single alignments, however, once again, this feature is limited by hardware and as such the sample size must be restricted to a smaller amount.
 
@@ -825,7 +834,7 @@ Besides the structural alignments, the sequence alignments were also computed us
 
 Both types of files that were required, sequences and structures, needed to be parsed so that they could be used in the next phase. Specifically, most of the SCOP files contained duplicate atoms for some amino acids, which would cause Maxcluster to not be able to process the corresponding structure file. As far as sequences go, the amino acid chains needed to be processed into the FASTA format so that they could be loaded into ClustalW.
 
-\section{Data processing} 
+\chapter{Data processing} 
 
 From the all against all alignments, Maxcluster outputs a single file that contains two types of information: the numbers that represent each structure within each Maxcluster execution, ranging from 1 to the amount of structures in input, and the pairwise similarities for each structure combination. Similarly, ClustalW also outputs the sequence identity percentage matrix, which has a different format than that of the Maxcluster files but needs to be processed all the same.
 
@@ -841,7 +850,7 @@ There are two main ways of achieving this, those being normalization and standar
 
 	 $Standardization: z = \frac{X - \mu}{\sigma}$
 
-In order to choose the most appropriate way to scale our data, its density estimation was determined. Usually, when the data distributions are more uniform, normalization is the preferred approach, which was the case as we can see in the distributions for the $a.1$ sample, shown below in figure \ref{fig:kdea1}.
+\textbf{In order to choose the most appropriate way to scale our data, its density estimation was determined. Usually, when the data distributions are more resemblant of a Gaussian distribution, standardization is the preferred approach. Since it is not the case, as we can see in the distributions for the $a.1$ sample, shown below in figure \ref{fig:kdea1}, normalization was chosen in order to rescale the data.}
 
 \begin{figure}[htbp]
 	\centering
@@ -861,17 +870,17 @@ In order to choose the most appropriate way to scale our data, its density estim
 	\label{fig:kdea1}
 \end{figure}
 
-After obtaining the alignment matrices, we also needed to calculate the distances between points and thus, the Euclidean distance was chosen for this. It is given by:
+After obtaining the alignment matrices, we also needed to calculate the distances between points and thus, the Euclidean distance was chosen for this and it is calculated through the following equation:
 
 	$$d(p,q) = \sqrt{\sum_{i = 1}^{n}\left( p_i - q_i \right)^2}$$
 
 
-\section{Clustering}
+\chapter{Structure clustering process}
 Having obtained the distance matrices, the clustering process was next. One of the algorithms that was considered was DBSCAN. Ultimately, it was not used as it was deemed too ineffective for the task at hand. This was due to the algorithm's approach to clustering, since its parameters are extremely hard to adjust to our data in the sense that it does not allow us to directly state how many clusters we wish to be formed. Besides the issue of estimating optimal parameters, there is also the issue that DBSCAN uses the density concept to cluster the data, which means that depending on its entry parameters there may be structures that are considered as noise and as such, will not be given a label which in turn implies that the final cluster evaluation will not take into account some of the input structures, thus hindering the experiment's results. The Affinity Propagation algorithm was also considered initially, however it was ruled out also due to its complex parameterization. This algorithm takes two numbers as input which are used to internally as rules in order to form clusters. Once again, the problem that comes from this type of approach is that the parameterization is attached to the shape of the data within each sample.
 
-Given this, the studied algorithms were agglomerative and k-medoids. Both of these also receive distance matrices as input and one the most important aspects is that we can choose how many clusters we want the data to be split into. As opposed to DBSCAN, these algorithms also label every structure in our dataset. The main advantage of these algorithms in this work is that it allows us to cluster the data without minding its shape, and thus we can apply a broader approach to clustering that may be used regardless of the sample.
+Given this, the studied algorithms were agglomerative and \textit{k}-medoids. Both of these also receive distance matrices as input and one the most important aspects is that we can choose how many clusters we want the data to be split into. As opposed to DBSCAN, these algorithms also label every structure in our dataset. The main advantage of these algorithms in this work is that it allows us to cluster the data without minding its shape, and thus we can apply a broader approach to clustering that may be used regardless of the sample.
 
-As for the experiment itself, we started by clustering the distance matrices of the mentioned similarity measures: RMSD, GDT-HA, GDT-TS, TM-Score and Maxsub. These provided us with the reference values (cluster evaluation metrics) that we wished to optimize, specifically the RMSD classifications, since it is the one used in the SCOP database. 
+\textbf{As for the experiment itself, we started by clustering the distance matrices of the mentioned similarity measures: RMSD, GDT-HA, GDT-TS, TM-Score and Maxsub. These provided us with the reference values (cluster evaluation metrics) that we wished to optimize by combining said matrices with each other and them measuring their performance against the existing SCOP classification.}
 
 So far, we have established that there is a need to combine different structure similarity measures. However, this is not an easy task since theoretically we can have every number within the [0,1] range as weights for the considered measures. In an effort to mitigate this issue, only weights with two decimal numbers were considered. Having gotten past this, there was now a need to find the best combination of weights among the different measures, for which a genetic algorithm was used. This is a powerful tool that can be applied in optimization problems, as is the case.
 
@@ -885,17 +894,17 @@ The general steps of a genetic algorithm are the following:
 	\item Repeat steps 2-5 for N generations or until convergence
 \end{enumerate}
 
-For this particular problem, our individuals are made of three numbers, each of which corresponds to the weight that a given protein similarity measure will take during the clustering process. As for fitness, the algorithm uses the AMI clustering evaluation metric, meaning that we are trying to optimize the weights with respect to the existing SCOP classification. After determining the individual whose weights generate the best ARI, we then calculate its internal clustering metrics. This way, we are guaranteed to obtain the weights that produce results that most closely resemble the existing classifications. It should be mentioned that it is to be expected that the external metrics should be lower than the base case, since we are using other similarity measures and comparing the results with others obtained with respect to RMSD. However, the internal metrics are expected to surpass those of the base classification, due to them not being attached to to any labels.
+For this particular problem, our individuals are made of decimal numbers, each of which corresponds to the weight that a given protein similarity measure will take during the clustering process. \textbf{As for fitness, the algorithm uses the AMI clustering evaluation metric, meaning that we are trying to optimize the weights with respect to the existing SCOPe classification in an attempt to obtain a set of labels as similar as possible to the existing one. After determining the individual whose weights generate the best AMI, we then calculate its internal clustering metrics. This way, we are guaranteed to obtain the weights that produce results that most closely resemble the existing classifications. It should be mentioned that it is to be expected that the external metrics should be lower than the base case, since we are using other similarity measures and comparing the results with others obtained with the previously mentioned process of automatic processes and manual curation. However, the internal metrics are expected to surpass those of the base classification, due to them not being attached to any labels and the potential that different structure similarity measures have of complementing each other's weaknesses.}
 
 \chapter{Results}
 
 In this chapter, the clustering results are presented along with a discussion regarding whether or not the results were as expected, if each algorithm is appropriate for this type of data and the which are structural similarity measures performed best.
 
-\section{Analysis}
+\section{Clustering with a single similarity measure}
 
-\subsection{Clustering with a single similarity measure}
+In the following sections, only the $a.1$ sample results are discussed and presented. Despite this, the results for the remaining samples are shown in the first annex of this document for which the following analysis and conclusions are also valid.  
 
-As was mentioned in the previous chapter, the experiments began by obtaining the base clustering results, specifically, the metrics that originated from the different algorithms when applied to the individual distance matrices of the structure similarity measures.
+As was mentioned in the previous chapter, the clustering experiments began by obtaining the base clustering results, specifically, the metrics that originated from the different algorithms when applied to the individual distance matrices of the structure similarity measures.
 
 \begin{figure}[htbp]
 	\centering
@@ -911,9 +920,15 @@ As was mentioned in the previous chapter, the experiments began by obtaining the
 	\label{fig:singlematrixcomplete}
 \end{figure}
 
-The tables displayed in figures \ref{fig:singlematrixaverage} and \ref{fig:singlematrixcomplete} above shows us the results obtained when applying the hierarchical clustering algorithm with average and complete linkage, respectively. In said tables, we can see that the row that corresponds to the RMSD clustering metrics has their values in blue, this is because RMSD is the protein similarity measure by which SCOP organizes its hierarchy and as such, its values serve as a reference to which all other values in the table will be compared to. 
+The tables displayed in figures \ref{fig:singlematrixaverage} and \ref{fig:singlematrixcomplete} above shows us the results obtained when applying the hierarchical clustering algorithm with average and complete linkage, respectively. 
 
-At this point, it was to be expected that at least the external metrics would perform worse for other similarity measures, since the base classification is obtained mainly through the RMSD alignments. On the other hand, the internal metrics for the other measures could have performed better, since they are not tied to an already existing classification. For this particular sample, $a.1$, changing the linkage type to complete changed nothing at all and thus, its corresponding table is exactly the same as the one displayed previously.
+%In said tables, we can see that the row that corresponds to the RMSD clustering metrics has their values in blue, this is because RMSD is the protein similarity measure by which SCOP organizes its hierarchy and as such, its values serve as a reference to which all other values in the table will be compared to. 
+
+At this point, it was to be expected that at least the external metrics would perform worse for other similarity measures, since the base classification is through a set of automated processes and manual curation by experts. On the other hand, the internal metrics for the other measures could have performed better, since they are not tied to an already existing classification. 
+
+Nevertheless, for this particular experiment it seems that by themselves, Maxsub and TM-score are a cut above the rest since they are able to produce clusters with high similarities among their members while also maintaining a close resemblance to the SCOPe classification.
+
+%For this particular sample, $a.1$, changing the linkage type to complete changed nothing at all and thus, its corresponding table is exactly the same as the one displayed previously.
 
 Furthermore, the clustering process was also applied to the sequences present in the sample. Though its results are poor according to the evaluation metrics, this is to be expected, because, as previously mentioned the samples were drawn at the superfamiliy level. This means that the proteins present in each sample share some commons ancestors among them, however the similarity traces that could indicate sequence homology have been lost during the evolutionary process. To illustrate this, we can check the kernel distribution for the sequence alignments in figure \ref{fig:kdea1}, which show us that most values range from 0\% to 20\%. It should be noted that even though the internal evaluation metrics are very favorable, due to the mentioned concentration, we must also consider the external ones, because it is not enough for the data points to be similar among themselves, they must also correctly be labeled.
 
@@ -926,49 +941,49 @@ On the other hand, the k-medoids algorithm produced some interesting results, as
 	\label{}
 \end{figure}
 
-Although we can see that there were several improvements from the base RMSD classification, we must be careful in this analysis. In this case, we should not pay much attention to the external clustering metrics due to them being compared to the classification attributed by the SCOP hierarchy, which uses a hierarchical clustering algorithm. Given this, we should focus on the internal metrics, which are very surprising due to the disparity between them.
+Although there are some favorable results in the cluster evaluation metrics, \textit{k}-medoids seems to start to point out early on that it is not one of the best suited algorithms for this particular task. This is because even though it performs well when comes to the external metrics, internally it is a bit lackluster as evidenced by its low Silhouette and Calinski-Harabasz scores.
+
+%Although we can see that there were several improvements from the base RMSD classification, we must be careful in this analysis. In this case, we should not pay much attention to the external clustering metrics due to them being compared to the classification attributed by the SCOP hierarchy, which uses a hierarchical clustering algorithm. Given this, we should focus on the internal metrics, which are very surprising due to the disparity between them.
 
 %CONTINUE
 
-\subsection{Clustering with a single similarity measure and sequences}
+\section{Clustering with a single similarity measure and sequences}
 
-To reiterate, the SCOP database uses a mixture of both manual and automatic methods to group the present domains into its hierarchy which use RMSD. Not only does this classification use protein structures, it also uses their sequences to obtain the hierarchies' labels. In an attempt to replicate this process with the goal of improving the performance of the external clustering measures, each of the similarity measures were combined with the sequence alignments. In the table below, we can see the results of this process.
+To reiterate, the SCOP database uses a mixture of both manual and automatic methods to group the present domains into its hierarchy. Not only does this classification use protein structures, it also uses their sequences to obtain the hierarchies' labels. In an attempt to replicate this process with the goal of improving the performance of the external clustering measures, each of the similarity measures were combined with the sequence alignments. In the table below, we can see the results of this process.
 
 The obtained results by clustering with sequence were somewhat unexpected, as we hoped it would improve performance. The similarity measures' distance matrices were combined one by one with the sequence distance matrix by taking complementary percentages of both of them. After this process was finished, we went through the results in order to find which combination produced the highest cluster evaluation metrics. However, after analyzing the results we can clearly see that by taking any percentage of the sequence matrix into account only decreases performance, contrary to what was expected. Once again, this is mostly due to the fact that at the superfamily layer, proteins do not share many similarities sequence wise, hence, it is not enough to effectively cluster our data.
 
-\subsection{Clustering with two similarity measures}
+\section{Clustering with two similarity measures}
 
 Since the use of sequences do not translate into an increase in performance, from this point on the experiences made were only based on the structure aspect of the proteins.
 
-This next step of the experiment focused on one of the main goals of this work: to explore the combinations of similarity measures. In this phase of the experiments, it was expected that we could improve the internal clustering metrics, since we aim to counter the disadvantages of other similarity measures with other ones. 
+This next step of the experiment focused on one of the main goals of this work: to explore the combinations of similarity measures. In this phase of the experiments, it was expected that we could improve the internal clustering metrics, since we aim to counter the disadvantages of other similarity measures with other ones. At this stage, we were mainly hoping to improve RMSD performance, however, the results displayed in the following tables surpassed our expectations.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{averagea1combined.jpeg}
+	\includegraphics[width=1\linewidth]{tableaveragea1combined.jpeg}
 	\caption{Hierarchical clustering results with average linkage for each combination of measures}
 	\label{}
 \end{figure}
 
-In the table from figure , the results that originated from the 10 different pairs of similarity measure combinations are displayed. These values were obtained through the previously mentioned genetic algorithm
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{completea1combined.jpeg}
+	\includegraphics[width=1\linewidth]{tablecompletea1combined.jpeg}
 	\caption{Hierarchical clustering results with complete linkage for each combination of measures}
 	\label{}
 \end{figure}
 
-\begin{figure}[htbp]
+The results that were obtained with the hierarchical algorithm were very favorable. Even though, the weights for the different pairs of similarity measures vary across samples, we can see that we are able to complement RMSD with other measures in order to improve both internal and external clustering metrics. Besides this, 
+
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=1\linewidth]{kmedoidsa1combined.jpeg}
+	\includegraphics[width=1\linewidth]{tablekmedoidsa1combined.jpeg}
 	\caption{\textit{k}-medoids clustering results for each combination of measures}
 	\label{}
 \end{figure}
 
 
-
-
-\subsection{Clustering multiple similarity matrices}
+\section{Clustering multiple similarity matrices}
 
 The final experiment was made using the several similarity distance matrices. In order to determine what percentage to take from each of them, a genetic algorithm was used, which saved us a lot of time since it would not be necessary to cluster the matrices with every single combination of weights. 
 
@@ -991,8 +1006,6 @@ In future prospects, it would be interesting to see the protein databases mentio
 Furthermore, classifications for new entries in the databases could also be experimentally obtained in order to verify if this clustering methodology for unknown label prediction may be applied in practice.
 
 In conclusion, the improvements were not as big as expected but hopefully the community could make use of this methodology in order to extract more meaningful information from protein data.
-
-%-usar 3 medidas-
 
 \section{Source code}
 
