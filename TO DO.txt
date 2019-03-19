@@ -1,0 +1,23 @@
+
+
+Analizar os resultados
+
+Restruturar o documento
+
+Fazer o plot do algoritmo genético
+
+Discutir os pesos do genético
+
+Discutir k-medoids
+
+Average vs complete linkage
+
+Passar ferramentas não utilizadas para outra secção
+
+fazer a descrição dos capítulos
+
+alinhar imagens do kernels 
+
+verificar todas as citaçoes
+
+mencionar parametros do genetico, converge muito cedo, e pesos não importam muito
