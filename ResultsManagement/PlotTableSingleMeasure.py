@@ -5,7 +5,9 @@ import re
 
 #path_to_results = 'C:/ShareSSD/scop/best_results/'
 path_to_results = 'C:/ShareSSD/scop/clustering_results_single_matrix/'
-path_to_tables = 'C:/ShareSSD/scop/tables_single_matrix/table-'
+path_to_tables = 'C:/ShareSSD/scop/tables_single_matrix/table'
+
+color = False
 
 for spl in ['a.1', 'a.3', 'b.2', 'b.3']:
     for alg in ['complete','average','kmedoids']:
@@ -80,19 +82,20 @@ for spl in ['a.1', 'a.3', 'b.2', 'b.3']:
         ref = reference_value+1
 
         #Color matrix
-        for i,j in the_table._cells:
-            print(str(the_table._cells[(i, j)]._text.get_text()))
-            if i > 0 and j > -1:
-                if i == ref:
-                    the_table._cells[(i, j)]._text.set_color('blue')
-                else:    
-                    if float(the_table._cells[(i, j)]._text.get_text()) > float(the_table._cells[(ref, j)]._text.get_text()):
-                        the_table._cells[(i, j)]._text.set_color('green')
-                    if float(the_table._cells[(i, j)]._text.get_text()) == float(the_table._cells[(ref, j)]._text.get_text()):
-                        the_table._cells[(i, j)]._text.set_color('black')
-                    if float(the_table._cells[(i, j)]._text.get_text()) < float(the_table._cells[(ref, j)]._text.get_text()):
-                        the_table._cells[(i, j)]._text.set_color('red')
+        if color:
+            for i,j in the_table._cells:
+                print(str(the_table._cells[(i, j)]._text.get_text()))
+                if i > 0 and j > -1:
+                    if i == ref:
+                        the_table._cells[(i, j)]._text.set_color('blue')
+                    else:    
+                        if float(the_table._cells[(i, j)]._text.get_text()) > float(the_table._cells[(ref, j)]._text.get_text()):
+                            the_table._cells[(i, j)]._text.set_color('green')
+                        if float(the_table._cells[(i, j)]._text.get_text()) == float(the_table._cells[(ref, j)]._text.get_text()):
+                            the_table._cells[(i, j)]._text.set_color('black')
+                        if float(the_table._cells[(i, j)]._text.get_text()) < float(the_table._cells[(ref, j)]._text.get_text()):
+                            the_table._cells[(i, j)]._text.set_color('red')
+            plt.savefig(path_to_tables+algorithm+'-'+sample+'.jpeg', format='jpeg', bbox_inches="tight", dpi=300)
 
-
-        plt.savefig(path_to_tables+algorithm+'-'+sample+'.jpeg', format='jpeg', bbox_inches="tight", dpi=300)
-
+        else:
+            plt.savefig(path_to_tables+algorithm+sample+'nocolor.jpeg', format='jpeg', bbox_inches="tight", dpi=300)

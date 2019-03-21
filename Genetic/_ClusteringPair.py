@@ -16,7 +16,7 @@ for measure in ['rmsd','gdt_2','gdt_4','tm','maxsub']:
         path_to_results = 'C:/ShareSSD/scop/clustering_results_seq/'
         measure1 = measure
         measure2 = measure
-        measure3 = 'seq'
+        measure3 = measure
 
         sample_for_domains = spl
         sample = str(spl)+'.'
@@ -44,7 +44,7 @@ for measure in ['rmsd','gdt_2','gdt_4','tm','maxsub']:
         for w1 in np.arange(0.05,1.05,0.05):
 
             w2 = 0
-            w3 = 1-w1
+            w3 = 0
             
             corr = mf.calculateCorrelationMatrix(matrix1, matrix2, matrix3, w1, w2, w3)
 
@@ -53,12 +53,12 @@ for measure in ['rmsd','gdt_2','gdt_4','tm','maxsub']:
                 agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage=link).fit(corr)
                 labels = agglomerative.labels_
                 metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-                ce.saveResultsWithSequenceWeights(measure1, measure3, w1, link, sample, metrics)
+                #ce.saveResultsWithSequenceWeights(measure1, measure3, w1, link, sample, metrics)
                 print(metrics)
 
             # K-Medoids
             medoids, clusters = km.kMedoids(corr, n_labels, 100)
             labels = km.sortLabels(clusters)
             metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-            ce.saveResultsWithSequenceWeights(measure1, measure3, w1, 'kmedoids', sample, metrics)
-            print(metrics)
+            #ce.saveResultsWithSequenceWeights(measure1, measure3, w1, 'kmedoids', sample, metrics)
+            #print(metrics)

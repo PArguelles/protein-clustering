@@ -18,7 +18,6 @@ import UtilitiesSCOP as scop
 from sklearn import metrics
 from sklearn.cluster import AgglomerativeClustering
 
-#'a.1','a.3','b.2','b.3'
 samples = ['a.1','a.3','b.2','b.3']
 
 clustering = ['complete','average']
@@ -45,7 +44,7 @@ for measures in combinations:
             algorithm = alg
             sample_for_domains = spl
             sample = spl+'.'  
-            path_to_results = 'C:/ShareSSD/scop/genetic_results_pair/gen_'+alg+'_'+sample+'_'+measure1+'_'+measure2       
+            #path_to_results = 'C:/ShareSSD/scop/genetic_results_pair/small_gen_'+alg+'_'+sample+'_'+measure1+'_'+measure2       
             matrix1 = rs.loadMatrixFromFile(sample, measure1)
             matrix2 = rs.loadMatrixFromFile(sample, measure2)
             matrix3 = rs.loadMatrixFromFile(sample, measure3)
@@ -61,8 +60,8 @@ for measures in combinations:
 
             current_individual = 0
             current_generation = 0
-            writer = open(path_to_results, 'w') 
-            writer.write('Gen: '+str(current_generation)+'\n')
+            #writer = open(path_to_results, 'w') 
+            #writer.write('Gen: '+str(current_generation)+'\n')
 
             #####################################################
             # GENETIC ALGORITHM
@@ -83,8 +82,8 @@ for measures in combinations:
                 w2 = indv[1]
                 w3 = indv[2]
 
-                w2 = 1 - w1
-                w3 = 0
+                #w2 = 1 - w1
+                #w3 = 0
 
                 corr = mf.calculateCorrelationMatrix(matrix1, matrix2, matrix3, w1, w2, w3)
                 if algorithm == 'complete':      
@@ -102,15 +101,6 @@ for measures in combinations:
                 global current_generation  
                 global POPSIZE
                 
-                if current_individual == POPSIZE:
-                    current_individual = 0
-                    current_generation += 1
-                    writer.write('Gen: '+str(current_generation)+'\n')
-
-                writer.write(str(current_individual)+': '+str(w1)+' '+str(w2)+' '+str(w3)+' '+' '.join(str(m) for m in metrics)+'\n')
-                current_individual += 1
-                print(current_individual)
-                #mtr = [round(m,2) for m in metrics]
                 return float(metrics[4]),
 
             toolbox.register("evaluate", evaluate)
@@ -126,7 +116,6 @@ for measures in combinations:
 
                 global NGENERATIONS
                 global POPSIZE
-                global writer
 
                 population = toolbox.population(n=POPSIZE)
 
@@ -145,7 +134,17 @@ for measures in combinations:
                 # Run GA
                 population, logbook = algorithms.eaSimple(population, toolbox, CXPB, MUTPB, NGENERATIONS, stats=stats)
                 
-                writer.close()
+                gen = logbook.select("gen")
+                min = logbook.select("min")
+                avg = logbook.select("avg")
+                max = logbook.select("max")
+
+                with open('C:/ShareSSD/scop/genetic_results_pair_avg/genetic_'+alg+'_'+spl+'_'+measure1+'_'+measure2, 'w') as nf:
+                    for g, mi, a, ma in zip(gen, min, avg, max):
+                        nf.write(str(g)+' '+str(mi)+' '+str(a)+' '+str(ma)+'\n')
+
+                    for indv in population:
+                        nf.write('Indv: '+str(indv[0])+' '+str(indv[1])+' '+str(indv[2])+'\n')
 
             if __name__ == "__main__":
                 main()

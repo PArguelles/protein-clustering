@@ -8,6 +8,8 @@ import re
 sample = 'a.1.'
 algorithm = 'complete'
 
+NGEN = 30
+
 combinations = [('rmsd','gdt_2'),('rmsd','gdt_4'),
                 ('rmsd','maxsub'),('rmsd','tm'),
                 ('gdt_2','gdt_4'),('gdt_2','maxsub'),
@@ -26,7 +28,7 @@ for m1, m2 in combinations:
 
     # read respective files from genetic algorithm
     #with open('C:/ShareSSD/scop/tests/complete_a.1._rmsd_gdt_2', 'r') as fp:
-    with open('C:/ShareSSD/scop/tests/'+algorithm+'_'+sample+'_'+m1+'_'+m2, 'r') as fp:
+    with open('C:/ShareSSD/scop/genetic_results_pair/gen_'+algorithm+'_'+sample+'_'+m1+'_'+m2, 'r') as fp:
         x = []
         y = []
 
@@ -34,7 +36,8 @@ for m1, m2 in combinations:
         while line:
 
             # get best individual from a generation
-            if 'Generation:' in line:
+            #if 'Generation:' in line:
+            if 'Gen' not in line:
                 values = re.findall(r'-?\d+\.?\d*', line)
                 x.append(float(values[0]))
                 y.append(float(values[1]))
@@ -44,7 +47,7 @@ for m1, m2 in combinations:
     internals_x.append(x)
     internals_y.append(y.sort())
 
-    break
+    #break
 
 
 plt.step(x, y, label=labels[0])
@@ -59,6 +62,6 @@ plt.ylim(0, 100)
 plt.xlabel("Generations")
 plt.ylabel("AMI")
 
-plt.xticks(np.arange(0, 20+1, 1.0))
+plt.xticks(np.arange(0, NGEN+1, 1.0))
 
 plt.show()

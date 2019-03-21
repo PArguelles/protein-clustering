@@ -3,9 +3,10 @@
 base_path_to_matrix <- "C:/ShareSSD/scop/data/values_"
 base_path_to_result <- "C:/ShareSSD/scop/kde_"
 base_path_to_stats <- 'C:/ShareSSD/scop/stats_'
+
 sample = 'a.1.'
 #measures = c('rmsd','gdt_2','gdt_4','tmscore_high','tmscore_low','maxsub_high','maxsub_low','seq_id') 
-measures = c('rmsd','gdt_2','gdt_4','seq') 
+measures = c('rmsd','gdt_2','gdt_4','seq','tm','maxsub') 
 
 for(measure in measures){
 

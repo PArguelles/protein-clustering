@@ -47,23 +47,24 @@ for m1, m2 in combinations:
         matrix2 = mf.calculateDistances(matrix2)
         matrix3 = mf.calculateDistances(matrix3)
 
-        for w1 in np.arange(0.05,1.00,0.05):
-            for w2 in np.arange(0.05,1.00,0.05):
-                for w3 in np.arange(0.05,1.00,0.05):
+        for w1 in np.arange(0.01,1.00,0.01):
+            #for w2 in np.arange(0.05,1.00,0.05):
+            w2 = 1-w1
+            w3 = 0
                     
-                    corr = mf.calculateCorrelationMatrix(matrix1, matrix2, matrix3, w1, w2, w3)
+            corr = mf.calculateCorrelationMatrix(matrix1, matrix2, matrix3, w1, w2, w3)
 
-                    # Hierarchical
-                    for link in ['complete','average']:
-                        agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage='complete').fit(corr)
-                        labels = agglomerative.labels_
-                        metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-                        ce.saveResultsCombined(measure1, measure2, w1, w2, w3, link, sample, metrics)
-                        print(metrics)
+            # Hierarchical
+            for link in ['complete','average']:
+                agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage=link).fit(corr)
+                labels = agglomerative.labels_
+                metrics = ce.clusterEvaluation(corr, labels, ground_truth)
+                ce.saveResultsCombined(measure1, measure2, w1, w2, w3, link, sample, metrics)
+                print(metrics)
 
-                    # K-Medoids
-                    medoids, clusters = km.kMedoids(corr, n_labels, 100)
-                    labels = km.sortLabels(clusters)
-                    metrics = ce.clusterEvaluation(corr, labels, ground_truth)
-                    ce.saveResultsCombined(measure1, measure2, w1, w2, w3, 'kmedoids', sample, metrics)
-                    print(metrics)
+            # K-Medoids
+            medoids, clusters = km.kMedoids(corr, n_labels, 100)
+            labels = km.sortLabels(clusters)
+            metrics = ce.clusterEvaluation(corr, labels, ground_truth)
+            ce.saveResultsCombined(measure1, measure2, w1, w2, w3, 'kmedoids', sample, metrics)
+            print(metrics)

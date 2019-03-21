@@ -51,7 +51,7 @@ def saveResultsWithSequenceWeights(measure1, measure2, w1, algorithm, sample, me
 
 def saveResultsWithWeights(measure1, measure2, w1, algorithm, sample, metrics):
 
-    path_to_results = 'C:/ShareSSD/scop/clustering_results_single/'
+    path_to_results = 'C:/ShareSSD/scop/clustering_results_pair/'
     
     with open(path_to_results+algorithm+'_'+sample+'_'+measure1+'_'+measure2+'_'+str(w1), 'w') as nf:
         nf.write('# Cluster evaluation: \n')

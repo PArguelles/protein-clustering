@@ -39,7 +39,7 @@ for m in measures:
 
             # Hierarchical
             for link in ['complete','average']:
-                agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage='complete').fit(matrix1)
+                agglomerative = AgglomerativeClustering(affinity='precomputed', n_clusters=n_labels, linkage=link).fit(matrix1)
                 labels = agglomerative.labels_
                 metrics = ce.clusterEvaluation(matrix1, labels, ground_truth)
                 ce.saveResults(measure1, measure1, link, sample, metrics)

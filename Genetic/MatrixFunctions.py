@@ -6,14 +6,6 @@ from sklearn.metrics.pairwise import euclidean_distances
 def symmetrizeMatrix(a):
         return a + a.T - np.diag(a.diagonal())
 
-def processGDTMatrix(a):
-        a = np.divide(a,100)
-        return a
-
-def normalize(a):
-        a = pp.normalize(a, norm='l1', axis=1)
-        return a
-
 def calculateDistances(a):
         corr = euclidean_distances(a,a)
         return corr
